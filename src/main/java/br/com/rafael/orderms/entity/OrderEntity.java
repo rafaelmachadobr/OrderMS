@@ -14,7 +14,7 @@ public class OrderEntity {
     @MongoId
     private Long orderId;
     @Indexed(name = "customer_id_index")
-    private String customerId;
+    private Long customerId;
     @Field(targetType = FieldType.DECIMAL128)
     private BigDecimal total;
     private List<OrderItemEntity> items;
@@ -30,11 +30,11 @@ public class OrderEntity {
         this.orderId = orderId;
     }
 
-    public String getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

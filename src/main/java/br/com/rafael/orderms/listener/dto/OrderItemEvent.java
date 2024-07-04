@@ -1,8 +1,10 @@
 package br.com.rafael.orderms.listener.dto;
 
+import java.math.BigDecimal;
+
 public record OrderItemEvent(
         String produto,
         Integer quantidade,
-        Double preco
+        BigDecimal preco
 ) {
 }
