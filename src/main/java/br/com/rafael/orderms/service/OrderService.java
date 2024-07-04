@@ -1,9 +1,12 @@
 package br.com.rafael.orderms.service;
 
+import br.com.rafael.orderms.controller.dto.OrderResponse;
 import br.com.rafael.orderms.entity.OrderEntity;
 import br.com.rafael.orderms.entity.OrderItemEntity;
 import br.com.rafael.orderms.listener.dto.OrderCreatedEvent;
 import br.com.rafael.orderms.repository.OrderRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,6 +29,12 @@ public class OrderService {
         entity.setTotal(getTotal(event));
 
         orderRepository.save(entity);
+    }
+
+    public Page<OrderResponse> findAllByCustomerId(Long customerId, PageRequest pageRequest) {
+        var orders = orderRepository.findAllByCustomerId(customerId, pageRequest);
+
+        return orders.map(OrderResponse::fromEntity);
     }
 
     private BigDecimal getTotal(OrderCreatedEvent event) {
